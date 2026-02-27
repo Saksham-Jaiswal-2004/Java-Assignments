@@ -3,6 +3,7 @@ package Assignment_6;
 import java.util.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.Image;
 import javax.swing.*;
 import java.util.regex.*;
 
@@ -15,7 +16,7 @@ public class sentenceGUI extends JFrame implements ActionListener
     JCheckBox c1,c2,c3,c4,c5,c6;
     String oldColor = "None", currentColor = "Default";
 
-    public static void main(String args[])
+    public static void main(String[] args)
     {
         new sentenceGUI();
     }
@@ -66,6 +67,10 @@ public class sentenceGUI extends JFrame implements ActionListener
 
         b5 = new JButton("Color History");
         b5.setBounds(85, 521, 200, 50);
+        ImageIcon originalIcon = new ImageIcon("src/Assignment_6/Color Hist.png");
+        Image scaledImage = originalIcon.getImage().getScaledInstance(30, 30, Image.SCALE_SMOOTH);
+        b5.setIconTextGap(10);
+        b5.setIcon(new ImageIcon(scaledImage));
         sentenceFrame.add(b5);
         b5.addActionListener(this);
 
