@@ -18,7 +18,7 @@ public class Editor
 
         try
         {
-            BufferedReader br = new BufferedReader(new FileReader("data.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("src/Assignment_7/data.txt"));
             String line;
 
             while ((line = br.readLine()) != null)
@@ -66,18 +66,23 @@ public class Editor
 
         try
         {
-            BufferedWriter bw = new BufferedWriter(new FileWriter("summary.txt.txt", true));
+            BufferedWriter bw = new BufferedWriter(new FileWriter("src/Assignment_7/summary.txt", true));
+            BufferedWriter bwData = new BufferedWriter(new FileWriter("src/Assignment_7/data.txt"));
             bw.newLine();
             for(String line : lines)
             {
                 bw.write(line);
                 bw.newLine();
+
+                bwData.write(line);
+                bwData.newLine();
             }
             bw.close();
+            bwData.close();
 
             System.out.println();
 
-            BufferedReader br = new BufferedReader(new FileReader("summary.txt.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("src/Assignment_7/summary.txt"));
             String line;
 
             while ((line = br.readLine()) != null)
@@ -96,9 +101,17 @@ public class Editor
     static String addWord(String sentence)
     {
         Scanner sc = new Scanner(System.in);
+
         System.out.print("Enter word to append: ");
-        String word = sc.next();
-        sentence = sentence.concat(" ").concat(word);
+        String newWord = sc.next();
+        System.out.print("Enter index to append: ");
+        int index = sc.nextInt();
+
+        String[] words = sentence.split(" ");
+        List<String> list = new ArrayList<>(Arrays.asList(words));
+        list.add(index, newWord);
+        sentence = String.join(" ", list);
+
         System.out.println(sentence);
         return sentence;
     }
@@ -106,11 +119,16 @@ public class Editor
     static String modifySpelling(String sentence)
     {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter old spelling: ");
-        String oldWord = sc.next();
+
+        System.out.print("Enter index of word to modify spelling: ");
+        int index = sc.nextInt();
         System.out.print("Enter new spelling: ");
         String newWord = sc.next();
-        sentence = sentence.replaceAll(oldWord, newWord);
+
+        String[] words = sentence.split(" ");
+        words[index-1] = newWord;
+        sentence = String.join(" ", words);
+
         System.out.println(sentence);
         return sentence;
     }
@@ -118,9 +136,14 @@ public class Editor
     static String deleteWord(String sentence)
     {
         Scanner sc = new Scanner(System.in);
-        System.out.print("Enter word to delete: ");
-        String word = sc.next();
-        sentence = sentence.replaceAll(word, "");
+        System.out.print("Enter index of word to delete: ");
+        int index = sc.nextInt();
+
+        String[] words = sentence.split(" ");
+        List<String> list = new ArrayList<>(Arrays.asList(words));
+        list.remove(index);
+        sentence = String.join(" ", list);
+
         System.out.println(sentence);
         return sentence;
     }
@@ -128,11 +151,16 @@ public class Editor
     static String addPunctuation(String sentence)
     {
         Scanner sc = new Scanner(System.in);
+
         System.out.print("Enter punctuation to append: ");
         String pun = sc.next();
-        System.out.print("Enter word to append punctuation: ");
-        String word = sc.next();
-        sentence = sentence.replaceAll(word, word+pun);
+        System.out.print("Enter index word to append punctuation: ");
+        int index = sc.nextInt();
+
+        String[] words = sentence.split(" ");
+        words[index-1] = words[index-1]+pun;
+        sentence = String.join(" ", words);
+
         System.out.println(sentence);
         return sentence;
     }

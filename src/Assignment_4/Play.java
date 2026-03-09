@@ -298,7 +298,7 @@ public class Play
         System.out.println("1. Football");
         System.out.println("2. Cricket");
         System.out.println("3. Basketball");
-        System.out.print("Enter the sport you want add data for (1-3): ");
+        System.out.print("Enter the sport you want add data.txt for (1-3): ");
         int ch = sc.nextInt();
 
         switch(ch)
